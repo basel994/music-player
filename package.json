@@ -1,0 +1,11 @@
+{
+  "name": "my-music-player",
+  "version": "1.0.0",
+  "description": "Basel Balkees Javascript music player",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Basel Balkees",
+  "license": "ISC"
+}
