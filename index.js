@@ -412,6 +412,9 @@ const playSelectedTracks = async() => {
                             // Display album image in an <img> element with id 'albumImage'
                             document.querySelector('.cover-image').setAttribute('src', imageUrl);
                         }
+                        else {
+                            document.querySelector('.cover-image').setAttribute("src","./assests/images/track_img.jpg");
+                        }
 
             
                         // Update your UI with the extracted metadata
