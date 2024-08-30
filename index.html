@@ -28,28 +28,38 @@
         <div class="grid-container">
             <div class="content">
         <div class="upload-tracks">
-            <img src="./assests/icons/no_tracks.png" />
-            <h1>No music files!</h1>
+            <img src="./assests/icons/no_tracks.png" class="no-music" />
+            <h1 class="no-music-header">No music files!</h1>
             <div class="upload">
                 <div class="file-container">
                     <label class="file-label"><span>upload</span><img src="./assests/icons/upload_button.png"/></label>
                     <input type="file" accept="audio/*" class="file-input" multiple />
                 </div>
-                <div onclick="playSelectedTracks()" class="start-play"><img src="./assests/icons/play_music.gif" /></div>
             </div>
             <div class="error"><h2>only audio files is valid !</h2></div>
         </div>
 
         <div class="music-player">
+            <div class="eq"><span></span></div>
             <div class="information"></div>
-            <div class="cover"><img src="./assests/images/Popular-Music-icon-in-round-black-color-on-transparent-background-PNG.png" alt="cover" class="cover-image" /></div>
+            <div class="cover">
+                <img src="./assests/images/Popular-Music-icon-in-round-black-color-on-transparent-background-PNG.png" alt="cover" class="cover-image" />
+                <div class="volume-container">
+                    <i class="fa fa-volume-down"></i>
+                    <input type="range" min="0" max="100" value="50" class="vol-slider" />
+                    <i class="fa fa-volume-up"></i>
+                </div>
+            </div>
             <div class="track-info">
                 <span class="track-name"></span>
                 <span class="track-artist"></span>
             </div>
             <div class="track-slider-container">
                 <span class="current-time">00:00</span>
-                <input type="range" class="track-slider" min="0" max="100" value="0"/>
+                <div class="track-slider-wrapper">
+                <input type="range" class="track-slider" min="1" max="100" value="0"/>
+                <div class="elapsed-time"></div>
+                </div>
                 <span class="total-time">00:00</span>
             </div>
             <div class="control">
@@ -61,11 +71,6 @@
                 </div>
                 <img src="./assests/icons/no_shuffle.png" class="shuffle" />
                 <input type="hidden" value="no-repeat" />
-            </div>
-            <div class="volume-container">
-                <i class="fa fa-volume-down"></i>
-                <input type="range" min="0" max="100" value="50" class="vol-slider" />
-                <i class="fa fa-volume-up"></i>
             </div>
         </div>
         </div>

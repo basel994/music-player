@@ -114,6 +114,7 @@
         display: grid;
         grid-template-columns: 2fr 0fr;
         transition: grid-template-columns 1s ease-in-out;
+        margin-top: 2rem;
     .content {
         overflow: hidden;
         white-space: nowrap;
@@ -190,7 +191,32 @@
     }
 }
     .hide-upload-tracks {
-        display: none;
+        position: absolute;
+        top: 0rem;
+        left: 2rem;
+        min-height: auto;
+        gap: 0.5rem;
+        .upload {
+            .file-container {
+                font-size: 1rem;
+                .file-label {
+                    background-color: transparent;
+                    img {
+                        width: 2rem;
+                        height: 2rem;
+                    }
+                }
+            }
+        }
+        .error-show {
+            position: absolute;
+            top: 2.5rem;
+            left: 0;
+            h2 {
+                font-size: 1rem;
+            }
+
+        }
     }
 
     .music-player {
@@ -198,11 +224,46 @@
         gap: 1rem;
         margin-top: 2rem;
         display: none;
+        .eq {
+            @extend %center-col-flex-display;
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            span {
+                position: relative;
+                background-color: #2fa55c;
+                width: 0.2rem;
+                height:0rem;
+                &::after, &::before {
+                    position: absolute;
+                    content: "";
+                    background-color: #2fa55c;
+                    width: 100%;
+                    height: 100%;
+                }
+                &::after {
+                    left: 1rem;
+                }
+                &::before {
+                    left: -1rem;
+                }
+            }
+        }
+        .eq-play {
+            span {
+                animation: eq1 1s ease-in-out infinite alternate ;
+                &::after {
+                animation: eq2 1s ease-in-out infinite alternate ;                }
+                &::before {
+                animation: eq0 1s ease-in-out infinite alternate ;                }
+            }
+        }
         .information {
-            font-size: 1.5rem;
-            color: rgb(0, 219, 248);
+            font-size: 1.2rem;
+            color: rgb(25, 135, 150);
         }
         .cover {
+            position: relative;
             width:15rem;
             height: 15rem;
             border: 0.1rem solid #b10303;
@@ -210,6 +271,23 @@
             img {
                 width: 100%;
                 height: 100%;
+            }
+            .volume-container {
+                @extend %center-col-flex-display;
+                flex-direction: column-reverse;
+                gap: 0.5rem;
+                position: absolute;
+                top: 2rem;
+                left: -5rem;
+                .vol-slider {
+                    max-width: 5rem;
+                    cursor: pointer;
+                    appearance: slider-vertical;
+                }
+                .fa {
+                    color: #ffffff;
+                    cursor: pointer;
+                }
             }
         }
         .track-info {
@@ -227,20 +305,39 @@
         .track-slider-container {
             @extend %center-row-flex-display;
             gap: 0.5rem;
+            .track-slider-wrapper {
+                position: relative;
+                .elapsed-time {
+                    position: absolute;
+                    height: 5px;
+                    background-color: #098153; /* Color for the elapsed time */
+                    top: 0.55rem;
+                    left: 0.1rem;
+                    opacity: 0.7;
+                    border-radius: 5px;
+                    z-index: 1;
+                }
             .track-slider {
+                cursor: pointer;
+                width: 100%;
+                -webkit-appearance: none;
                 appearance: none;
                 height: 5px;
-                background: rgb(235, 204, 204);
-                opacity: 0.7;
+                border-radius: 5px;
+                background: #d3d3d3; /* Default color for the slider */
+                outline: none;
+                z-index: 0;
                 &::-webkit-slider-thumb {
                     appearance: none;
                     width: 15px;
                     height: 15px;
-                    background: rgb(111, 248, 111);
+                    background: #098153;
                     cursor: pointer;
                     border-radius: 50%;
+                    z-index: 2;
                 }
             }
+        }
             .current-time, .total-time{
                 color:#d7dddf
             }
@@ -254,31 +351,25 @@
             img {
                 width: 2rem;
                 height: 2rem;
+                cursor: pointer;
             }
             .track-control {
                 @extend %center-row-flex-display;
                 gap: 1rem;
                 .disabled {
                     opacity: 0.5;
+                    cursor:alias;
                 }
                 .fa {
                     color: #ffffff;
+                    cursor: pointer;
                 }
             }
 
         }
 
 
-        .volume-container {
-            @extend %center-row-flex-display;
-            gap: 0.5rem;
-            .vol-slider {
-                max-width: 5rem;
-            }
-            .fa {
-                color: #ffffff;
-            }
-        }
+
     }
     .show-music-player {
         display: flex;
@@ -368,6 +459,36 @@
         }
         to {
             color: #e73f3f;
+        }
+    }
+    @keyframes eq0 {
+        from {
+            height: 0rem;
+            top: 0.1rem;
+        }
+        to {
+            height: 1.5rem;
+            top: 0rem;
+        }
+    }
+    @keyframes eq1 {
+        from {
+            height: 0rem;
+            top: 1rem;
+        }
+        to {
+            height: 1.3rem;
+            top: 0rem;
+        }
+    }
+    @keyframes eq2 {
+        from {
+            height: 0rem;
+            top: 0.1rem;
+        }
+        to {
+            height: 1rem;
+            top: 0rem;
         }
     }
     @keyframes shake {

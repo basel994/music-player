@@ -1,13 +1,13 @@
-.app .music .grid-container .side .side-menu .tracks .empty, .app .music .grid-container .side .side-menu .tracks .tracks-list, .app .music .grid-container .content .music-player .track-info, .app .music .grid-container .content .music-player, .app .music .grid-container .content .upload-tracks, .app .welcome-container .welcome, .app .welcome-container, .app .music .grid-container .side .side-menu .tracks .tracks-header, .app .music .grid-container .content .music-player .volume-container, .app .music .grid-container .content .music-player .control .track-control, .app .music .grid-container .content .music-player .control, .app .music .grid-container .content .music-player .track-slider-container, .app .music .grid-container .content .upload-tracks .upload, .app .music .toggle, .app .welcome-container .welcome .start {
+.app .music .grid-container .side .side-menu .tracks .empty, .app .music .grid-container .side .side-menu .tracks .tracks-list, .app .music .grid-container .content .music-player .track-info, .app .music .grid-container .content .music-player .cover .volume-container, .app .music .grid-container .content .music-player .eq, .app .music .grid-container .content .music-player, .app .music .grid-container .content .upload-tracks, .app .welcome-container .welcome, .app .welcome-container, .app .music .grid-container .side .side-menu .tracks .tracks-header, .app .music .grid-container .content .music-player .control .track-control, .app .music .grid-container .content .music-player .control, .app .music .grid-container .content .music-player .track-slider-container, .app .music .grid-container .content .upload-tracks .upload, .app .music .toggle, .app .welcome-container .welcome .start {
   display: flex;
 }
 
-.app .music .grid-container .side .side-menu .tracks .tracks-header, .app .music .grid-container .content .music-player .volume-container, .app .music .grid-container .content .music-player .control .track-control, .app .music .grid-container .content .music-player .control, .app .music .grid-container .content .music-player .track-slider-container, .app .music .grid-container .content .upload-tracks .upload, .app .music .toggle, .app .welcome-container .welcome .start {
+.app .music .grid-container .side .side-menu .tracks .tracks-header, .app .music .grid-container .content .music-player .control .track-control, .app .music .grid-container .content .music-player .control, .app .music .grid-container .content .music-player .track-slider-container, .app .music .grid-container .content .upload-tracks .upload, .app .music .toggle, .app .welcome-container .welcome .start {
   justify-content: center;
   align-items: center;
 }
 
-.app .music .grid-container .side .side-menu .tracks .empty, .app .music .grid-container .side .side-menu .tracks .tracks-list, .app .music .grid-container .content .music-player .track-info, .app .music .grid-container .content .music-player, .app .music .grid-container .content .upload-tracks, .app .welcome-container .welcome, .app .welcome-container {
+.app .music .grid-container .side .side-menu .tracks .empty, .app .music .grid-container .side .side-menu .tracks .tracks-list, .app .music .grid-container .content .music-player .track-info, .app .music .grid-container .content .music-player .cover .volume-container, .app .music .grid-container .content .music-player .eq, .app .music .grid-container .content .music-player, .app .music .grid-container .content .upload-tracks, .app .welcome-container .welcome, .app .welcome-container {
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -99,6 +99,7 @@
   display: grid;
   grid-template-columns: 2fr 0fr;
   transition: grid-template-columns 1s ease-in-out;
+  margin-top: 2rem;
 }
 .app .music .grid-container .content {
   overflow: hidden;
@@ -175,18 +176,74 @@
   display: flex;
 }
 .app .music .grid-container .content .hide-upload-tracks {
-  display: none;
+  position: absolute;
+  top: 0rem;
+  left: 2rem;
+  min-height: auto;
+  gap: 0.5rem;
+}
+.app .music .grid-container .content .hide-upload-tracks .upload .file-container {
+  font-size: 1rem;
+}
+.app .music .grid-container .content .hide-upload-tracks .upload .file-container .file-label {
+  background-color: transparent;
+}
+.app .music .grid-container .content .hide-upload-tracks .upload .file-container .file-label img {
+  width: 2rem;
+  height: 2rem;
+}
+.app .music .grid-container .content .hide-upload-tracks .error-show {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+}
+.app .music .grid-container .content .hide-upload-tracks .error-show h2 {
+  font-size: 1rem;
 }
 .app .music .grid-container .content .music-player {
   gap: 1rem;
   margin-top: 2rem;
   display: none;
 }
+.app .music .grid-container .content .music-player .eq {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+}
+.app .music .grid-container .content .music-player .eq span {
+  position: relative;
+  background-color: #2fa55c;
+  width: 0.2rem;
+  height: 0rem;
+}
+.app .music .grid-container .content .music-player .eq span::after, .app .music .grid-container .content .music-player .eq span::before {
+  position: absolute;
+  content: "";
+  background-color: #2fa55c;
+  width: 100%;
+  height: 100%;
+}
+.app .music .grid-container .content .music-player .eq span::after {
+  left: 1rem;
+}
+.app .music .grid-container .content .music-player .eq span::before {
+  left: -1rem;
+}
+.app .music .grid-container .content .music-player .eq-play span {
+  animation: eq1 1s ease-in-out infinite alternate;
+}
+.app .music .grid-container .content .music-player .eq-play span::after {
+  animation: eq2 1s ease-in-out infinite alternate;
+}
+.app .music .grid-container .content .music-player .eq-play span::before {
+  animation: eq0 1s ease-in-out infinite alternate;
+}
 .app .music .grid-container .content .music-player .information {
-  font-size: 1.5rem;
-  color: rgb(0, 219, 248);
+  font-size: 1.2rem;
+  color: rgb(25, 135, 150);
 }
 .app .music .grid-container .content .music-player .cover {
+  position: relative;
   width: 15rem;
   height: 15rem;
   border: 0.1rem solid #b10303;
@@ -195,6 +252,24 @@
 .app .music .grid-container .content .music-player .cover img {
   width: 100%;
   height: 100%;
+}
+.app .music .grid-container .content .music-player .cover .volume-container {
+  flex-direction: column-reverse;
+  gap: 0.5rem;
+  position: absolute;
+  top: 2rem;
+  left: -5rem;
+}
+.app .music .grid-container .content .music-player .cover .volume-container .vol-slider {
+  max-width: 5rem;
+  cursor: pointer;
+  -webkit-appearance: slider-vertical;
+     -moz-appearance: slider-vertical;
+          appearance: slider-vertical;
+}
+.app .music .grid-container .content .music-player .cover .volume-container .fa {
+  color: #ffffff;
+  cursor: pointer;
 }
 .app .music .grid-container .content .music-player .track-info {
   gap: 0.5rem;
@@ -210,22 +285,40 @@
 .app .music .grid-container .content .music-player .track-slider-container {
   gap: 0.5rem;
 }
-.app .music .grid-container .content .music-player .track-slider-container .track-slider {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  height: 5px;
-  background: rgb(235, 204, 204);
-  opacity: 0.7;
+.app .music .grid-container .content .music-player .track-slider-container .track-slider-wrapper {
+  position: relative;
 }
-.app .music .grid-container .content .music-player .track-slider-container .track-slider::-webkit-slider-thumb {
+.app .music .grid-container .content .music-player .track-slider-container .track-slider-wrapper .elapsed-time {
+  position: absolute;
+  height: 5px;
+  background-color: #098153; /* Color for the elapsed time */
+  top: 0.55rem;
+  left: 0.1rem;
+  opacity: 0.7;
+  border-radius: 5px;
+  z-index: 1;
+}
+.app .music .grid-container .content .music-player .track-slider-container .track-slider-wrapper .track-slider {
+  cursor: pointer;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  height: 5px;
+  border-radius: 5px;
+  background: #d3d3d3; /* Default color for the slider */
+  outline: none;
+  z-index: 0;
+}
+.app .music .grid-container .content .music-player .track-slider-container .track-slider-wrapper .track-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
           appearance: none;
   width: 15px;
   height: 15px;
-  background: rgb(111, 248, 111);
+  background: #098153;
   cursor: pointer;
   border-radius: 50%;
+  z-index: 2;
 }
 .app .music .grid-container .content .music-player .track-slider-container .current-time, .app .music .grid-container .content .music-player .track-slider-container .total-time {
   color: #d7dddf;
@@ -239,24 +332,18 @@
 .app .music .grid-container .content .music-player .control img {
   width: 2rem;
   height: 2rem;
+  cursor: pointer;
 }
 .app .music .grid-container .content .music-player .control .track-control {
   gap: 1rem;
 }
 .app .music .grid-container .content .music-player .control .track-control .disabled {
   opacity: 0.5;
+  cursor: alias;
 }
 .app .music .grid-container .content .music-player .control .track-control .fa {
   color: #ffffff;
-}
-.app .music .grid-container .content .music-player .volume-container {
-  gap: 0.5rem;
-}
-.app .music .grid-container .content .music-player .volume-container .vol-slider {
-  max-width: 5rem;
-}
-.app .music .grid-container .content .music-player .volume-container .fa {
-  color: #ffffff;
+  cursor: pointer;
 }
 .app .music .grid-container .content .show-music-player {
   display: flex;
@@ -338,6 +425,36 @@
   }
   to {
     color: #e73f3f;
+  }
+}
+@keyframes eq0 {
+  from {
+    height: 0rem;
+    top: 0.1rem;
+  }
+  to {
+    height: 1.5rem;
+    top: 0rem;
+  }
+}
+@keyframes eq1 {
+  from {
+    height: 0rem;
+    top: 1rem;
+  }
+  to {
+    height: 1.3rem;
+    top: 0rem;
+  }
+}
+@keyframes eq2 {
+  from {
+    height: 0rem;
+    top: 0.1rem;
+  }
+  to {
+    height: 1rem;
+    top: 0rem;
   }
 }
 @keyframes shake {

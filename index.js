@@ -81,19 +81,10 @@ const isMusicFile = (file) => {
 
 // EventListener for handling uploaded user files
 fileInput.addEventListener("change", () => {
-    uploaded_files = Array.from(fileInput.files);
-    let check_audio = new Array(uploaded_files.length).fill(false);
-
-
-    // remove previous user tracks
-    const tracksParentDiv = document.querySelector(".tracks");
-    const tracksDiv = document.querySelector(".tracks-list");
-    if(tracksDiv !== null){
-    tracksParentDiv.removeChild(tracksDiv);
-    }
-    
-    if(uploaded_files.length > 0){
-        uploaded_files.map((f,i) => {
+    let new_files = Array.from(fileInput.files);
+    let check_audio = new Array(new_files.length).fill(false);
+    if(new_files.length > 0){
+        new_files.map((f,i) => {
             if(isMusicFile(f)){
                 check_audio[i] = true;
             }
@@ -104,15 +95,33 @@ fileInput.addEventListener("change", () => {
 
 
         if(check_audio.every(e=> e !== false)){
+            uploaded_files = uploaded_files.concat(new_files);
             random_indexes = generateUniqueRandomNumbers(0, uploaded_files.length-1);
+            const tracksParentDiv = document.querySelector(".tracks");
+            const tracksDiv = document.querySelector(".tracks-list");
+            if(tracksDiv !== null){
+            tracksParentDiv.removeChild(tracksDiv);
+            }
             const newTracksDiv = document.createElement("div");
             newTracksDiv.classList.add("tracks-list");
             tracksParentDiv.appendChild(newTracksDiv);
             error.classList.remove("error-show");
-            upload_tracks.classList.toggle("hide-upload-tracks");
-            music_player.classList.toggle("show-music-player");
+            const no_music_img = document.querySelector(".no-music");
+            const no_music_header = document.querySelector(".no-music-header");
+            if(no_music_img){
+                upload_tracks.removeChild(no_music_img);
+            }
+            if(no_music_header) {
+                upload_tracks.removeChild(no_music_header);
+            }
+
+            upload_tracks.classList.add("hide-upload-tracks");
+            music_player.classList.add("show-music-player");
             playSelectedTracks();
-            tracksParentDiv.removeChild(document.querySelector(".empty"));
+            const empty = document.querySelector(".empty");
+            if(empty) {
+                tracksParentDiv.removeChild(empty);
+            }
             uploaded_files.map((track,i) => {
                const divElement = document.createElement("div");
                divElement.classList.add("track");
@@ -134,6 +143,10 @@ fileInput.addEventListener("change", () => {
         }
     else{
         error.classList.add("error-show");
+        setTimeout(() => {
+            error.classList.remove("error-show");
+        },3000);
+
     }
     }
 });
@@ -180,6 +193,7 @@ playPause.addEventListener("click", () => {
     playState = !playState;
     if(playState){
         currentTrack.play();
+        document.querySelector(".eq").classList.add("eq-play");
         playPause.classList.remove("fa-play-circle");
         playPause.classList.add("fa-pause-circle");
         curr_time.classList.remove("current-time-pause");
@@ -187,6 +201,7 @@ playPause.addEventListener("click", () => {
     }
     else{
         currentTrack.pause();
+        document.querySelector(".eq").classList.remove("eq-play");
         playPause.classList.remove("fa-pause-circle");
         playPause.classList.add("fa-play-circle");
         curr_time.classList.add("current-time-pause");
@@ -196,17 +211,20 @@ playPause.addEventListener("click", () => {
 
 
 next.addEventListener("click", async() => {
-    document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
     if(default_shuffle){
         if(randomTrackIndex+1 < random_indexes.length){
+        document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
+        document.querySelector(".eq").classList.remove("eq-play");
         playState = false;
         randomTrackIndex++;
-        trackIndex = random_indexes[randomTrackIndex]
+        trackIndex = random_indexes[randomTrackIndex];
         playSelectedTracks();
         }
     }
     else{
     if(trackIndex+1 < uploaded_files.length){
+        document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
+        document.querySelector(".eq").classList.remove("eq-play");
         playState = false;
     trackIndex++;
     playSelectedTracks();
@@ -216,9 +234,10 @@ next.addEventListener("click", async() => {
 
 
 prev.addEventListener("click", async() =>{
-    document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
     if(default_shuffle){
         if(randomTrackIndex > 0){
+        document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
+        document.querySelector(".eq").classList.remove("eq-play");
         playState = false;
         randomTrackIndex--;
         trackIndex = random_indexes[randomTrackIndex];
@@ -227,6 +246,8 @@ prev.addEventListener("click", async() =>{
     }
     else{
     if(trackIndex > 0){
+        document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
+        document.querySelector(".eq").classList.remove("eq-play");
         playState = false;
     trackIndex--;
     playSelectedTracks();
@@ -239,6 +260,7 @@ prev.addEventListener("click", async() =>{
 currentTrack.addEventListener('ended', async function() {
     playPause.classList.remove("fa-pause-circle");
     playPause.classList.add("fa-play-circle");
+    document.querySelector(".eq").classList.remove("eq-play");
     playState = false;
     document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
     if(default_shuffle?trackIndex!=random_indexes[random_indexes.length-1]:trackIndex+1 < uploaded_files.length){
@@ -326,7 +348,7 @@ const resetValues = () => {
     vol_slider.value = 100;
     setVolume();
   })
-
+  const elapsedTime = document.querySelector('.elapsed-time');
   const seekUpdate = () => {
     let seekPosition = 0;
    
@@ -350,6 +372,7 @@ const resetValues = () => {
       // Display the updated duration
       curr_time.textContent = currentMinutes + ":" + currentSeconds;
       total_duration.textContent = durationMinutes + ":" + durationSeconds;
+      elapsedTime.style.width = seekPosition + '%';
     }
   }
 const playSelectedTracks = async() => {
@@ -362,6 +385,7 @@ const playSelectedTracks = async() => {
             currentTrack.addEventListener('loadedmetadata', async function() {
                 await currentTrack.play();
                 document.querySelector(`.is-play${trackIndex}`).classList.add("track_play");
+                document.querySelector(".eq").classList.add("eq-play");
                 setVolume();
                 playState = true;
                 updateTimer = setInterval(seekUpdate, 1000);
