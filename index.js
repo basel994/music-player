@@ -193,7 +193,8 @@ playPause.addEventListener("click", () => {
     playState = !playState;
     if(playState){
         currentTrack.play();
-        document.querySelector(".eq").classList.add("eq-play");
+        document.querySelector(".left-note").classList.add("show-note");
+        document.querySelector(".right-note").classList.add("show-note");
         playPause.classList.remove("fa-play-circle");
         playPause.classList.add("fa-pause-circle");
         curr_time.classList.remove("current-time-pause");
@@ -201,7 +202,8 @@ playPause.addEventListener("click", () => {
     }
     else{
         currentTrack.pause();
-        document.querySelector(".eq").classList.remove("eq-play");
+        document.querySelector(".left-note").classList.remove("show-note");
+        document.querySelector(".right-note").classList.remove("show-note");
         playPause.classList.remove("fa-pause-circle");
         playPause.classList.add("fa-play-circle");
         curr_time.classList.add("current-time-pause");
@@ -214,7 +216,8 @@ next.addEventListener("click", async() => {
     if(default_shuffle){
         if(randomTrackIndex+1 < random_indexes.length){
         document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
-        document.querySelector(".eq").classList.remove("eq-play");
+        document.querySelector(".left-note").classList.remove("show-note");
+        document.querySelector(".right-note").classList.remove("show-note");
         playState = false;
         randomTrackIndex++;
         trackIndex = random_indexes[randomTrackIndex];
@@ -224,7 +227,8 @@ next.addEventListener("click", async() => {
     else{
     if(trackIndex+1 < uploaded_files.length){
         document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
-        document.querySelector(".eq").classList.remove("eq-play");
+        document.querySelector(".left-note").classList.remove("show-note");
+        document.querySelector(".right-note").classList.remove("show-note");
         playState = false;
     trackIndex++;
     playSelectedTracks();
@@ -237,7 +241,8 @@ prev.addEventListener("click", async() =>{
     if(default_shuffle){
         if(randomTrackIndex > 0){
         document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
-        document.querySelector(".eq").classList.remove("eq-play");
+        document.querySelector(".left-note").classList.remove("show-note");
+        document.querySelector(".right-note").classList.remove("show-note");
         playState = false;
         randomTrackIndex--;
         trackIndex = random_indexes[randomTrackIndex];
@@ -247,7 +252,8 @@ prev.addEventListener("click", async() =>{
     else{
     if(trackIndex > 0){
         document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
-        document.querySelector(".eq").classList.remove("eq-play");
+        document.querySelector(".left-note").classList.remove("show-note");
+        document.querySelector(".right-note").classList.remove("show-note");
         playState = false;
     trackIndex--;
     playSelectedTracks();
@@ -260,7 +266,8 @@ prev.addEventListener("click", async() =>{
 currentTrack.addEventListener('ended', async function() {
     playPause.classList.remove("fa-pause-circle");
     playPause.classList.add("fa-play-circle");
-    document.querySelector(".eq").classList.remove("eq-play");
+    document.querySelector(".left-note").classList.remove("show-note");
+    document.querySelector(".right-note").classList.remove("show-note");
     playState = false;
     document.querySelector(`.is-play${trackIndex}`).classList.remove("track_play");
     if(default_shuffle?trackIndex!=random_indexes[random_indexes.length-1]:trackIndex+1 < uploaded_files.length){
@@ -385,7 +392,8 @@ const playSelectedTracks = async() => {
             currentTrack.addEventListener('loadedmetadata', async function() {
                 await currentTrack.play();
                 document.querySelector(`.is-play${trackIndex}`).classList.add("track_play");
-                document.querySelector(".eq").classList.add("eq-play");
+                document.querySelector(".left-note").classList.add("show-note");
+                document.querySelector(".right-note").classList.add("show-note");
                 setVolume();
                 playState = true;
                 updateTimer = setInterval(seekUpdate, 1000);

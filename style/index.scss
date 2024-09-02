@@ -25,7 +25,7 @@
 }
 .app {
     min-height: 100vh;
-    background:url('./../assests/images/wallpaper_music.jpg');
+    background:url('./../assests/images/dark_wallpaper.jpeg');
     background-position:center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,13 +38,13 @@
         .welcome {
             @extend %center-col-flex-display;
             left: 0;
-            h1 {
-                color: white;
+            & h1:first-child {
+                color: #0099ad;
                 font-size: 2.5rem;
             }
-            h2 {
-                color: #e78989;
-                font-size: 2rem;
+            & h1:not(:first-child) {
+                color: #ee5959;
+                font-size: 2.7rem;
             }
             .start {
                 @extend %center-row-flex-display;
@@ -119,7 +119,6 @@
         overflow: hidden;
         white-space: nowrap;
     .upload-tracks {
-        min-height: 100vh;
         @extend %center-col-flex-display;
         gap: 2rem;
         img {
@@ -222,51 +221,18 @@
     .music-player {
         @extend %center-col-flex-display;
         gap: 1rem;
-        margin-top: 2rem;
         display: none;
-        .eq {
-            @extend %center-col-flex-display;
-            position: absolute;
-            top: -2rem;
-            left: 50%;
-            span {
-                position: relative;
-                background-color: #2fa55c;
-                width: 0.2rem;
-                height:0rem;
-                &::after, &::before {
-                    position: absolute;
-                    content: "";
-                    background-color: #2fa55c;
-                    width: 100%;
-                    height: 100%;
-                }
-                &::after {
-                    left: 1rem;
-                }
-                &::before {
-                    left: -1rem;
-                }
-            }
-        }
-        .eq-play {
-            span {
-                animation: eq1 1s ease-in-out infinite alternate ;
-                &::after {
-                animation: eq2 1s ease-in-out infinite alternate ;                }
-                &::before {
-                animation: eq0 1s ease-in-out infinite alternate ;                }
-            }
-        }
+
         .information {
             font-size: 1.2rem;
-            color: rgb(25, 135, 150);
+            color: rgb(255, 255, 255);
         }
         .cover {
             position: relative;
             width:15rem;
             height: 15rem;
             border: 0.1rem solid #b10303;
+            border-radius: 0.5rem;
             background-color: transparent;
             img {
                 width: 100%;
@@ -288,6 +254,23 @@
                     color: #ffffff;
                     cursor: pointer;
                 }
+            }
+            .left-note, .right-note {
+                position: absolute;
+                top: -1rem;
+                color:#0aa8d8;
+                display: none;
+            }
+            .left-note {
+            left: 0;
+            animation: left-note 3s ease-in-out infinite forwards;
+            }
+            .right-note {
+            right: 0;
+            animation: right-note 3s ease-in-out infinite forwards;
+            }
+            .show-note {
+                display: flex;
             }
         }
         .track-info {
@@ -380,19 +363,18 @@
     position: relative;
     overflow: hidden;
     .side-menu {
-        min-height: 100vh;
         transition: width 1s ease-in-out;
-        border: 0.1rem solid rgb(150, 20, 20);
+        border: 0.1rem solid rgb(245, 134, 134);
         white-space: nowrap;
         padding: 0.2rem;
         .tracks {
             .tracks-header {
                 @extend %center-row-flex-display;
                 padding: 0.2rem;
-                border-bottom: 0.2rem solid #ffffff;
-                background-color: #323536;
+                border-bottom: 0.1rem dotted #ffffff;
                 h1 {
-                    color: #2ef107;
+                    color: #dd4786;
+                    font-size: 1.5rm;
                 }
             }
             .tracks-list {
@@ -407,12 +389,12 @@
                 font-size: 1.2rem;
             }
             .track_play {
+                color: rgb(18, 255, 58);
                 animation: shake 10s ease-in-out infinite;
             }
             }
             .empty {
                 @extend %center-col-flex-display;
-                min-height: 100vh;
                 h2 {
                     color: #06c5ac;
                 }
@@ -461,40 +443,31 @@
             color: #e73f3f;
         }
     }
-    @keyframes eq0 {
-        from {
-            height: 0rem;
-            top: 0.1rem;
-        }
-        to {
-            height: 1.5rem;
-            top: 0rem;
-        }
-    }
-    @keyframes eq1 {
-        from {
-            height: 0rem;
-            top: 1rem;
-        }
-        to {
-            height: 1.3rem;
-            top: 0rem;
-        }
-    }
-    @keyframes eq2 {
-        from {
-            height: 0rem;
-            top: 0.1rem;
-        }
-        to {
-            height: 1rem;
-            top: 0rem;
-        }
-    }
+
     @keyframes shake {
         0%, 100% { transform: translateX(0); }
         10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
         20%, 40%, 60%, 80% { transform: translateX(10px); }
+    }
+    @keyframes left-note {
+        from {
+            left: 0;
+            transform: translateY(0);
+        }
+        to {
+            left: -2rem;
+            transform: translateY(-5rem);
+        }
+    }
+    @keyframes right-note {
+        from {
+            right: 0;
+            transform: translateY(0);
+        }
+        to {
+            right: -2rem;
+            transform: translateY(-5rem);
+        }
     }
 
 }
@@ -502,11 +475,11 @@
     .app {
         & .welcome-container {
             .welcome {
-                h1 {
+                & h1:first-child {
                     font-size: 2rem;
                 }
-                h2 {
-                    font-size: 1.7rem;
+                & h1:not(:first-child) {
+                    font-size: 2.2rem;
                 }
                 .start {
                     p {

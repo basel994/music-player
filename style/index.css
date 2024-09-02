@@ -1,4 +1,4 @@
-.app .music .grid-container .side .side-menu .tracks .empty, .app .music .grid-container .side .side-menu .tracks .tracks-list, .app .music .grid-container .content .music-player .track-info, .app .music .grid-container .content .music-player .cover .volume-container, .app .music .grid-container .content .music-player .eq, .app .music .grid-container .content .music-player, .app .music .grid-container .content .upload-tracks, .app .welcome-container .welcome, .app .welcome-container, .app .music .grid-container .side .side-menu .tracks .tracks-header, .app .music .grid-container .content .music-player .control .track-control, .app .music .grid-container .content .music-player .control, .app .music .grid-container .content .music-player .track-slider-container, .app .music .grid-container .content .upload-tracks .upload, .app .music .toggle, .app .welcome-container .welcome .start {
+.app .music .grid-container .side .side-menu .tracks .empty, .app .music .grid-container .side .side-menu .tracks .tracks-list, .app .music .grid-container .content .music-player .track-info, .app .music .grid-container .content .music-player .cover .volume-container, .app .music .grid-container .content .music-player, .app .music .grid-container .content .upload-tracks, .app .welcome-container .welcome, .app .welcome-container, .app .music .grid-container .side .side-menu .tracks .tracks-header, .app .music .grid-container .content .music-player .control .track-control, .app .music .grid-container .content .music-player .control, .app .music .grid-container .content .music-player .track-slider-container, .app .music .grid-container .content .upload-tracks .upload, .app .music .toggle, .app .welcome-container .welcome .start {
   display: flex;
 }
 
@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-.app .music .grid-container .side .side-menu .tracks .empty, .app .music .grid-container .side .side-menu .tracks .tracks-list, .app .music .grid-container .content .music-player .track-info, .app .music .grid-container .content .music-player .cover .volume-container, .app .music .grid-container .content .music-player .eq, .app .music .grid-container .content .music-player, .app .music .grid-container .content .upload-tracks, .app .welcome-container .welcome, .app .welcome-container {
+.app .music .grid-container .side .side-menu .tracks .empty, .app .music .grid-container .side .side-menu .tracks .tracks-list, .app .music .grid-container .content .music-player .track-info, .app .music .grid-container .content .music-player .cover .volume-container, .app .music .grid-container .content .music-player, .app .music .grid-container .content .upload-tracks, .app .welcome-container .welcome, .app .welcome-container {
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,7 @@
 
 .app {
   min-height: 100vh;
-  background: url("./../assests/images/wallpaper_music.jpg");
+  background: url("./../assests/images/dark_wallpaper.jpeg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -29,13 +29,13 @@
 .app .welcome-container .welcome {
   left: 0;
 }
-.app .welcome-container .welcome h1 {
-  color: white;
+.app .welcome-container .welcome h1:first-child {
+  color: #0099ad;
   font-size: 2.5rem;
 }
-.app .welcome-container .welcome h2 {
-  color: #e78989;
-  font-size: 2rem;
+.app .welcome-container .welcome h1:not(:first-child) {
+  color: #ee5959;
+  font-size: 2.7rem;
 }
 .app .welcome-container .welcome .start {
   margin-top: 1.5rem;
@@ -106,7 +106,6 @@
   white-space: nowrap;
 }
 .app .music .grid-container .content .upload-tracks {
-  min-height: 100vh;
   gap: 2rem;
 }
 .app .music .grid-container .content .upload-tracks img {
@@ -202,51 +201,18 @@
 }
 .app .music .grid-container .content .music-player {
   gap: 1rem;
-  margin-top: 2rem;
   display: none;
-}
-.app .music .grid-container .content .music-player .eq {
-  position: absolute;
-  top: -2rem;
-  left: 50%;
-}
-.app .music .grid-container .content .music-player .eq span {
-  position: relative;
-  background-color: #2fa55c;
-  width: 0.2rem;
-  height: 0rem;
-}
-.app .music .grid-container .content .music-player .eq span::after, .app .music .grid-container .content .music-player .eq span::before {
-  position: absolute;
-  content: "";
-  background-color: #2fa55c;
-  width: 100%;
-  height: 100%;
-}
-.app .music .grid-container .content .music-player .eq span::after {
-  left: 1rem;
-}
-.app .music .grid-container .content .music-player .eq span::before {
-  left: -1rem;
-}
-.app .music .grid-container .content .music-player .eq-play span {
-  animation: eq1 1s ease-in-out infinite alternate;
-}
-.app .music .grid-container .content .music-player .eq-play span::after {
-  animation: eq2 1s ease-in-out infinite alternate;
-}
-.app .music .grid-container .content .music-player .eq-play span::before {
-  animation: eq0 1s ease-in-out infinite alternate;
 }
 .app .music .grid-container .content .music-player .information {
   font-size: 1.2rem;
-  color: rgb(25, 135, 150);
+  color: rgb(255, 255, 255);
 }
 .app .music .grid-container .content .music-player .cover {
   position: relative;
   width: 15rem;
   height: 15rem;
   border: 0.1rem solid #b10303;
+  border-radius: 0.5rem;
   background-color: transparent;
 }
 .app .music .grid-container .content .music-player .cover img {
@@ -270,6 +236,23 @@
 .app .music .grid-container .content .music-player .cover .volume-container .fa {
   color: #ffffff;
   cursor: pointer;
+}
+.app .music .grid-container .content .music-player .cover .left-note, .app .music .grid-container .content .music-player .cover .right-note {
+  position: absolute;
+  top: -1rem;
+  color: #0aa8d8;
+  display: none;
+}
+.app .music .grid-container .content .music-player .cover .left-note {
+  left: 0;
+  animation: left-note 3s ease-in-out infinite forwards;
+}
+.app .music .grid-container .content .music-player .cover .right-note {
+  right: 0;
+  animation: right-note 3s ease-in-out infinite forwards;
+}
+.app .music .grid-container .content .music-player .cover .show-note {
+  display: flex;
 }
 .app .music .grid-container .content .music-player .track-info {
   gap: 0.5rem;
@@ -354,19 +337,18 @@
   overflow: hidden;
 }
 .app .music .grid-container .side .side-menu {
-  min-height: 100vh;
   transition: width 1s ease-in-out;
-  border: 0.1rem solid rgb(150, 20, 20);
+  border: 0.1rem solid rgb(245, 134, 134);
   white-space: nowrap;
   padding: 0.2rem;
 }
 .app .music .grid-container .side .side-menu .tracks .tracks-header {
   padding: 0.2rem;
-  border-bottom: 0.2rem solid #ffffff;
-  background-color: #323536;
+  border-bottom: 0.1rem dotted #ffffff;
 }
 .app .music .grid-container .side .side-menu .tracks .tracks-header h1 {
-  color: #2ef107;
+  color: #dd4786;
+  font-size: 1.5rm;
 }
 .app .music .grid-container .side .side-menu .tracks .tracks-list {
   margin-top: 3rem;
@@ -380,10 +362,8 @@
   font-size: 1.2rem;
 }
 .app .music .grid-container .side .side-menu .tracks .tracks-list .track_play {
+  color: rgb(18, 255, 58);
   animation: shake 10s ease-in-out infinite;
-}
-.app .music .grid-container .side .side-menu .tracks .empty {
-  min-height: 100vh;
 }
 .app .music .grid-container .side .side-menu .tracks .empty h2 {
   color: #06c5ac;
@@ -427,36 +407,6 @@
     color: #e73f3f;
   }
 }
-@keyframes eq0 {
-  from {
-    height: 0rem;
-    top: 0.1rem;
-  }
-  to {
-    height: 1.5rem;
-    top: 0rem;
-  }
-}
-@keyframes eq1 {
-  from {
-    height: 0rem;
-    top: 1rem;
-  }
-  to {
-    height: 1.3rem;
-    top: 0rem;
-  }
-}
-@keyframes eq2 {
-  from {
-    height: 0rem;
-    top: 0.1rem;
-  }
-  to {
-    height: 1rem;
-    top: 0rem;
-  }
-}
 @keyframes shake {
   0%, 100% {
     transform: translateX(0);
@@ -468,13 +418,33 @@
     transform: translateX(10px);
   }
 }
+@keyframes left-note {
+  from {
+    left: 0;
+    transform: translateY(0);
+  }
+  to {
+    left: -2rem;
+    transform: translateY(-5rem);
+  }
+}
+@keyframes right-note {
+  from {
+    right: 0;
+    transform: translateY(0);
+  }
+  to {
+    right: -2rem;
+    transform: translateY(-5rem);
+  }
+}
 
 @media screen and (max-width: 800px) {
-  .app .welcome-container .welcome h1 {
+  .app .welcome-container .welcome h1:first-child {
     font-size: 2rem;
   }
-  .app .welcome-container .welcome h2 {
-    font-size: 1.7rem;
+  .app .welcome-container .welcome h1:not(:first-child) {
+    font-size: 2.2rem;
   }
   .app .welcome-container .welcome .start p {
     font-size: 1.5rem;
